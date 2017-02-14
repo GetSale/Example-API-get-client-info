@@ -27,7 +27,7 @@ if (empty($widget_id)) {
 
 //Используем полученые данные от GetSale
 //Например, запишем их в log
-$file = 'log/log.txt';
+$file = 'log.txt';
 $current = file_get_contents($file);
 $current .= 'time: ' . date('Y-m-d h:i:s A') . '\n';
 $current .= "fields: eventEmail: $eventEmail, eventFirstName: $eventFirstName, widget_id: $widget_id. \n";
