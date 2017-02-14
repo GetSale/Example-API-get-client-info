@@ -26,7 +26,7 @@ if (empty($widget_id)) {
 //TO_DO Проверяем подлинность полученного запроса
 
 //Используем полученые данные от GetSale
-//Например, запишим их в log
+//Например, запишем их в log
 $file = 'log/log.txt';
 $current = file_get_contents($file);
 $current .= 'time: ' . date('Y-m-d h:i:s A') . '\n';
