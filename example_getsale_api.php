@@ -30,6 +30,6 @@ if (empty($widget_id)) {
 $file = 'log/log.txt';
 $current = file_get_contents($file);
 $current .= 'time: ' . date('Y-m-d h:i:s A') . '\n';
-$current .= "fields: eventEmail: $eventEmail eventFirstName: $eventFirstName widget_id: $widget_id. \n";
+$current .= "fields: eventEmail: $eventEmail, eventFirstName: $eventFirstName, widget_id: $widget_id. \n";
 file_put_contents($file, $current);
 ?>
