@@ -38,7 +38,10 @@ $decodedBody = json_decode($requestBody, true);
 $fields = $decodedBody['fields'];
 
 $eventEmail = $fields['email'];
+$eventPhone = $fields['phone'];
 $eventFirstName = $fields['firstName'];
+$eventLastName = $fields['lastName'];
+$eventOther = $fields['other'];
 $widget_id = $decodedBody['widget_id'];
 $eventUrl = $decodedBody['url'];
 
