@@ -2,41 +2,41 @@
 //Пример работы GetSale API для получения данных о пользователях
 
 //Укажите свой ключ API
-define('G_APIKEY', 'your_API_KEY');
+define('G_APIKEY', 'enter_yor_API_KEI');
 
-//Получаем контент от GetSale
+//Получаем контент с внешних ресурсов
 $requestBody = file_get_contents('php://input');
 
 //Проверяем подлинность полученного запросa
 //Логирование хэдеров
 foreach (getallheaders() as $name => $value) {
     if ($name == "X-GetSale-Signature") {
-        $newSigna = hash("sha256", "$requestBody" . G_APIKEY);
-
-        if (strcmp($newSigna, $value) == 0) {
-            //Пишем в log
+        //Генерируем собственную подпись, используя API_KEY
+        $signa = hash("sha256", "$requestBody" . G_APIKEY);
+        //Сравниваем подписи
+        if (strcmp($signa, $value) == 0) {
+            //Пишем в log об успешном сравнении
             $file = 'log.txt';
             $current = file_get_contents($file);
-            $current .= "getSigna: " . $value . "\n";
-            $current .= "mySigna: " . $newSigna . "\n";
+            $current .= "Congrats! Signature verification is complete!\n";
             file_put_contents($file, $current);
         } else {
-            //Пишем в log
+            //Пишем в log об ошибке
             $file = 'log.txt';
             $current = file_get_contents($file);
-            $current .= "getSigna: " . $value . "\n";
-            $current .= "mySigna: " . $newSigna . "\n";
+            $current .= "getSignature: " . $value . "\n";
+            $current .= "yourSignature: " . $signa . "\n";
             $current .= "error: Signature verification failed. \n";
             file_put_contents($file, $current);
+            //Заканчиваем работу скрипта, если ошибка
             exit;
         }
     }
 }
 
-//Продолжаем, если запрос полученный от GetSale правильный
+//Продолжаем, если полученный запрос действительно от GetSale
 $decodedBody = json_decode($requestBody, true);
 $fields = $decodedBody['fields'];
-
 $eventEmail = $fields['email'];
 $eventPhone = $fields['phone'];
 $eventFirstName = $fields['firstName'];
@@ -48,7 +48,7 @@ $eventUrl = $decodedBody['url'];
 //Сообщаем об успешном получении, сообщаем 200OK
 http_response_code(200);
 
-//Фильтр на неинтересующие наc запросы
+//Фильтр на неинтересующие наc запросы, например, на конкретный виджет GetSale
 if (empty($widget_id)) {
     exit;
 }
