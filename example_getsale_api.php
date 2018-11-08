@@ -80,6 +80,7 @@ $eventOther = $fields['other'];
 $widget_id = $decodedBody['widget_id'];
 $project_id = $decodedBody['project_id'];
 $eventUrl = $decodedBody['url'];
+$visit_id = $decodedBody['visit_id'];
 
 //Сообщаем об успешном получении, сообщаем 200OK
 http_response_code(200);
@@ -93,7 +94,7 @@ if (empty($widget_id)) {
 $file = 'log.txt';
 $current = file_get_contents($file);
 $current .= "time: " . date('Y-m-d h:i:s A') . "\n";
-$current .= "fields: eventEmail:$eventEmail,  eventPhone:$eventPhone, eventFirstName: $eventFirstName, eventLastName: $eventLastName, eventOther: $eventOther, eventUrl: $eventUrl, project_id: $project_id, widget_id: $widget_id \n";
+$current .= "fields: eventEmail:$eventEmail,  eventPhone:$eventPhone, eventFirstName: $eventFirstName, eventLastName: $eventLastName, eventOther: $eventOther, eventUrl: $eventUrl, project_id: $project_id, widget_id: $widget_id, visit_id: $visit_id \n";
 file_put_contents($file, $current);
 exit;
 ?>
